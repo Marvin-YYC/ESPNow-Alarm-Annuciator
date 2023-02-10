@@ -1,12 +1,9 @@
 /*
   Date: 07-05-21
-  Code written by: Dharmik
+  Origianal Code written by: Dharmik
   ESP32 sending a message to Signal messenger
   Find more on www.TechTOnions.com
 */
-
-#include <WiFi.h>         //Including wifi.h library it will take care of all wifi related task
-#include <HTTPClient.h>   //Including HTTPClient.h library to use all api 
 
 
 String url_1;                            //url String will be used to store the final generated URL
@@ -23,77 +20,60 @@ void send_message_open()
   }
   Serial.println();
   Serial.println("Connected to WiFi"); // Print wifi connect message
-
+  Serial.println("Open Message Signal");
   message_open_to_signal(""); // use message_to_signal function to send your message
 }
 
-
-void  message_open_to_signal(String message)       // user define function to send meassage to Signal app
+void  message_open_to_signal(String message)       // user define function to send message via Signal
 {
   //use signal/whatsapp/telegram api url here
+Serial.println("Open Message URL");
 
-  url_1 = "https://api.callmebot.com/signal/send.php?phone=YOUR API INFORMATION";// your CallMeBot/Signal api information
-
-
+  url_1 = "https://api.callmebot.com/signal/send.php?phone=+14039783140&apikey=678870&text=+⚠+<<+ALARM+>>+⚠%0AGarage+Door+OPEN%0A628+10+Ave+NE%0A%0A🄶🄰🅁🄰🄶🄴🄶🅄🄰🅁🄳";
+ 
+  //url_1 = "https://api.callmebot.com/signal/send.php?phone=+14039783140&apikey=678870&text=+⚠+<<+ALARM+>>+⚠%0A%0AGarage+Door+OPEN%0A%0A628+10ᵗʰ+Aᴠᴇɴᴜᴇ+NE%0A%0A🄶🄰🅁🄰🄶🄴🄶🅄🄰🅁🄳"
+  
+  //url_1 = "https://api.callmebot.com/signal/send.php?phone=+15873558950&apikey=569070&text=OPEN+This+is+a+test+🄶🄰🅁🄰🄶🄴🄶🅄🄰🅁🄳";
+  
+  //url_1 = "https://api.callmebot.com/signal/send.php?phone=+14039783140&apikey=678870&text=+⚠<<ALARM>>⚠%0AGarage+Door+OPEN%0A628+10+Ave+NE%0A%0A🄶🄰🅁🄰🄶🄴🄶🅄🄰🅁🄳";
+  //url_1 = "https://api.callmebot.com/signal/send.php?phone=+15873558950&apikey=569070&text=GARAGE+DOOR+OPEN+🅈🄰🅁🄳🄶🅄🄰🅁🄳";
+  //%20 for space, %0A for new lines no need for + before or after unless you want double line space.
+  //Do not use this symbol "#" in your custom message, it will cause an error?!?!
+  //https://api.callmebot.com/signal/send.php?phone=+15873558950&apikey=569070&text=This+is+a+test
+ Serial.println("post data 1");
   postData_1(); // calling postData to run the above-generated url once so that you will receive a message.
 }
-
 void postData_1()     //userDefine function used to call api(POST data)
 {
+  Serial.println("Int HTTP Code");
   int httpCode;     // variable used to get the responce http code after calling api
   HTTPClient http;  // Declare object of class HTTPClient
   http.begin(url_1);  // begin the HTTPClient object with generated url
   httpCode = http.POST(url_1); // Finaly Post the URL with this function and it will store the http code
-    
+  Serial.println("HTTP Code Bottom");  
   //add below if you want message to be sent twice
     /* http.begin(url);
       httpCode = http.POST(url);
     */
     
-  if (httpCode == 200)      // Check if the responce http code is 200
+  if (httpCode == 200)      // Check if the response http code is 200
   {
     Serial.println("Sent OPEN Ok."); // print message sent ok message 
     http.end();          // After calling API end the HTTP client object.
-    delay(50);
+    Serial.println("HTTP End ok");
   }
   
   else                      // if response HTTP code is not 200 it means there is some error.
   {
     Serial.println("ERROR sending OPEN."); // print error message.
     http.end();          // After calling API end the HTTP client object.
-    digitalWrite(GREEN_LED, HIGH);//red+green led flash on and off together six times and then red stays on, green blinks normal status to indicate send error
-    digitalWrite(RED_LED, HIGH);
-    delay(3000);
-    digitalWrite(GREEN_LED, LOW);
-    digitalWrite(RED_LED, LOW);
-    delay(250); // off 100ms
-    digitalWrite(GREEN_LED, HIGH);
-    digitalWrite(RED_LED, HIGH);
-    delay(3000);
-    digitalWrite(GREEN_LED, LOW);
-    digitalWrite(RED_LED, LOW);
-    delay(250); // off 100ms
-    digitalWrite(GREEN_LED, HIGH);
-    digitalWrite(RED_LED, HIGH);
-    delay(3000);
-    digitalWrite(GREEN_LED, LOW);
-    digitalWrite(RED_LED, LOW);
-    delay(250); // off 100ms
-    digitalWrite(GREEN_LED, HIGH);
-    digitalWrite(RED_LED, HIGH);
-    delay(3000);
-    digitalWrite(GREEN_LED, LOW);
-    digitalWrite(RED_LED, LOW);
-    delay(250); // off 100ms
-    digitalWrite(GREEN_LED, HIGH);
-    digitalWrite(RED_LED, HIGH);
-    delay(3000);
-    digitalWrite(GREEN_LED, LOW);
-    digitalWrite(RED_LED, LOW);
-    delay(250); // off 100ms
-    digitalWrite(GREEN_LED, HIGH);
-    digitalWrite(RED_LED, HIGH);
-  
+    Serial.println("Flash Blue LED.");
+    //digitalWrite(BLUE_LED, HIGH);
+    //delay(3000);
+    //digitalWrite(BLUE_LED, LOW);
+    //delay(250);
+    digitalWrite(BLUE_LED, HIGH);
+    Serial.println("Blue LED Stay ON");
   }
- 
-}
+     Serial.println("Message Tab End");
+ }
