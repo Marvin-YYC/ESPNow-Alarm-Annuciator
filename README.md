@@ -23,3 +23,5 @@ At the moment the message is sent correctly (less than 10 seconds) but the Annun
 
 
 ☻ I would also like to have the system send a door closed message and a start-up message, but will have to work that out later.
+
+Thanks in advance to anyone that can offer assistance ☺ I'm new to coding and Arduino IDE
