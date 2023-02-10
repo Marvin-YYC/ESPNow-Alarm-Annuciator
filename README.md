@@ -2,7 +2,7 @@
 Alarm system using ESP now on Seeed Xiao ESP32c3
 
 This code does not currently include the **Initiator** code from the other ESP32 as I am still having trouble figuring out how to get it to work with the XIAO board. 
-Once I have that sorted out and the solar charged battery I will add it here.
+Once I have that sorted out and the solar charged battery I will add it here. I can only get it to run on a WROOM.
 
 The way it is currently running, the **Initiator** board in the garage or at a remote gate/building sends a data message to the **Annunciator** board which is located 
 in my house. When the message indicates that a door/gate is open it activates a buzzer and Red LED on the **Annunciator** and then connects to wifi and sends a message
