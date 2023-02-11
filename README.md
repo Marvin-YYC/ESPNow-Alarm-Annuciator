@@ -25,6 +25,6 @@ At the moment the message is sent correctly (usually less than 5 seconds) but th
 
 ☻ I would also like to have the system send a door closed message and a start-up message, but will have to work that out later.
 
-Thanks in advance to anyone that can offer assistance ☺ I'm new to coding and Arduino IDE
+Thanks in advance to anyone that can offer assistance ☺ I'm new to coding and Arduino IDE 
 
 
